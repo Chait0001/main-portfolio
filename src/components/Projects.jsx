@@ -14,6 +14,14 @@ const Projects = () => {
       demoLink: 'https://health-sync-final-syvo.vercel.app',
     },
     {
+      title: 'Zentron',
+      label: '🤖 ai chatbot',
+      description: "A full-stack AI chatbot application featuring live conversational capabilities. Integrated with Groq API for fast responses, supported by a robust MERN backend.",
+      techStack: ['React', 'Node.js', 'MongoDB', 'Express', 'Groq API'],
+      githubLink: 'https://github.com/Chait0001/Zentron.git',
+      demoLink: 'https://zentron-chi.vercel.app/',
+    },
+    {
       title: 'Authentication System',
       label: '🔧 foundational stuff',
       description: "A full JWT auth flow — signup, login, protected routes, the works. Built this to really understand how auth works under the hood, not just copy-paste from tutorials.",
@@ -36,6 +44,14 @@ const Projects = () => {
       techStack: ['Node.js', 'Express.js', 'JWT', 'MySQL', 'RBAC'],
       githubLink: 'https://github.com/Chait0001/rbac-api',
       demoLink: null,
+    },
+    {
+      title: 'DOIFY',
+      label: '⚡ frontend project',
+      description: "A beautiful lofi-themed productivity app to manage tasks, projects & goals. Built with a cozy dark UI, animated banner, and localStorage persistence.",
+      techStack: ['React.js', 'Vite', 'Tailwind CSS', 'localStorage', 'Canvas Confetti'],
+      githubLink: 'https://github.com/Chait0001/Doify',
+      demoLink: 'https://doify-nine.vercel.app/',
     },
   ];
 

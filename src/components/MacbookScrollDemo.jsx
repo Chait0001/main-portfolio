@@ -3,25 +3,11 @@ import { MacbookScroll } from "@/components/ui/macbook-scroll";
 
 const projects = [
   {
-    title: 'Authentication System',
-    label: '🔧 foundational stuff',
-    description: "A full JWT auth flow — signup, login, protected routes, the works. Built this to really understand how auth works under the hood.",
-    techStack: ['Node.js', 'Express.js', 'JWT', 'MongoDB', 'bcrypt'],
-    githubLink: 'https://github.com/Chait0001/auth-system',
-  },
-  {
     title: 'Task Manager App',
     label: '⚡ full stack',
     description: "Full CRUD, auth baked in, and an API that I'm actually proud of. Yes, another todo app — but this one's got auth.",
     techStack: ['React', 'Node.js', 'Express.js', 'MongoDB', 'REST API'],
-    githubLink: 'https://github.com/Chait0001/task-manager',
-  },
-  {
-    title: 'RBAC REST API',
-    label: '🔐 backend deep-dive',
-    description: "Role-based access control done properly. Admins, users, permissions — the kind of backend architecture that makes you feel like a real engineer.",
-    techStack: ['Node.js', 'Express.js', 'JWT', 'MySQL', 'RBAC'],
-    githubLink: 'https://github.com/Chait0001/rbac-api',
+    githubLink: 'https://github.com/Chait0001/Task-Management.git',
   },
 ];
 

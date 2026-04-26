@@ -1,8 +1,8 @@
+'use client'
 import { useState } from 'react';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { motion } from 'framer-motion';
 
 const Contact = () => {
-  const [ref, isVisible] = useScrollAnimation({ threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -56,18 +56,41 @@ const Contact = () => {
     },
   ];
 
+  const fieldVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
-    <section id="contact" className="section-padding" ref={ref}>
+    <section id="contact" className="section-padding py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
           
           {/* Left — Info */}
-          <div className={`transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Get in Touch<span className="text-white/20">.</span>
-            </h2>
+          <motion.div 
+            initial={{ opacity: 0, x: -80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="mb-8">
+              <motion.h2 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.5 }}
+                className="text-4xl md:text-5xl font-bold text-white"
+              >
+                Get in Touch<span className="text-cyan-400">.</span>
+              </motion.h2>
+              <motion.div
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="h-0.5 bg-cyan-400 origin-left mt-2 w-16"
+              />
+            </div>
             <p className="text-white/40 text-base mb-8 font-light leading-relaxed">
               Have a project in mind or just want to say hi?
               <br />
@@ -83,78 +106,106 @@ const Contact = () => {
 
             <div className="flex items-center gap-3">
               {socialLinks.map((link) => (
-                <a
+                <motion.a
                   key={link.name}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   title={link.name}
+                  whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.08)" }}
+                  viewport={{ once: false, amount: 0.3 }}
                   className="w-10 h-10 rounded-full border border-white/[0.10] flex items-center justify-center text-white/40 hover:text-white/80 hover:border-white/[0.25] transition-all duration-300"
                 >
                   {link.icon}
-                </a>
+                </motion.a>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Right — Form */}
-          <div className={`transition-all duration-1000 delay-200 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
+          <motion.div 
+            initial={{ opacity: 0, x: 80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <form onSubmit={handleSubmit} className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-6 md:p-8 space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white text-sm placeholder-white/25 focus:outline-none focus:border-white/[0.20] transition-colors duration-200"
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white text-sm placeholder-white/25 focus:outline-none focus:border-white/[0.20] transition-colors duration-200"
-                />
-              </div>
-
-              <input
-                type="text"
-                name="subject"
-                placeholder="Subject"
-                value={formData.subject}
-                onChange={handleChange}
-                className="w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white text-sm placeholder-white/25 focus:outline-none focus:border-white/[0.20] transition-colors duration-200"
-              />
-
-              <textarea
-                name="message"
-                placeholder="Message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={5}
-                className="w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white text-sm placeholder-white/25 focus:outline-none focus:border-white/[0.20] transition-colors duration-200 resize-none"
-              />
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full py-3.5 rounded-lg font-medium text-sm tracking-wide transition-all duration-200 ${
-                  submitted
-                    ? 'bg-white/20 text-white cursor-default'
-                    : 'bg-white text-black hover:bg-white/90 active:bg-white/80'
-                }`}
+              <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ staggerChildren: 0.1, delayChildren: 0.4 }}
+                className="space-y-4"
               >
-                {submitted ? 'Message Sent ✓' : isSubmitting ? 'Sending...' : 'Send Message ✈'}
-              </button>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <motion.div variants={fieldVariants}>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white text-sm placeholder-white/25 focus:outline-none focus:border-white/[0.20] transition-colors duration-200"
+                    />
+                  </motion.div>
+                  <motion.div variants={fieldVariants}>
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white text-sm placeholder-white/25 focus:outline-none focus:border-white/[0.20] transition-colors duration-200"
+                    />
+                  </motion.div>
+                </div>
+
+                <motion.div variants={fieldVariants}>
+                  <input
+                    type="text"
+                    name="subject"
+                    placeholder="Subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white text-sm placeholder-white/25 focus:outline-none focus:border-white/[0.20] transition-colors duration-200"
+                  />
+                </motion.div>
+
+                <motion.div variants={fieldVariants}>
+                  <textarea
+                    name="message"
+                    placeholder="Message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={5}
+                    className="w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white text-sm placeholder-white/25 focus:outline-none focus:border-white/[0.20] transition-colors duration-200 resize-none"
+                  />
+                </motion.div>
+
+                <motion.button
+                  variants={fieldVariants}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  animate={!submitted && !isSubmitting ? {
+                    scale: [1, 1.01, 1],
+                    transition: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                  } : {}}
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`w-full py-3.5 rounded-lg font-medium text-sm tracking-wide transition-all duration-200 ${
+                    submitted
+                      ? 'bg-white/20 text-white cursor-default'
+                      : 'bg-white text-black hover:bg-white/90 active:bg-white/80'
+                  }`}
+                >
+                  {submitted ? 'Message Sent ✓' : isSubmitting ? 'Sending...' : 'Send Message ✈'}
+                </motion.button>
+              </motion.div>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -162,3 +213,6 @@ const Contact = () => {
 };
 
 export default Contact;
+
+
+

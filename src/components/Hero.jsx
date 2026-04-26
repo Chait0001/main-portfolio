@@ -1,4 +1,6 @@
+'use client'
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { NoiseBackground } from '@/components/ui/noise-background';
 
 const roles = [
@@ -12,11 +14,6 @@ const Hero = () => {
   const [displayText, setDisplayText] = useState('');
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => setIsLoaded(true), 100);
-  }, []);
 
   useEffect(() => {
     const currentRole = roles[roleIndex];
@@ -44,26 +41,64 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, roleIndex]);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center section-padding pt-24 relative">
       <div className="max-w-5xl mx-auto w-full relative z-10">
-        <div className={`text-center transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <motion.div
+          className="text-center"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }}
+        >
           
           {/* Subtitle */}
-          <p className="text-base md:text-lg text-white/50 mb-6 tracking-wide font-light">
+          <motion.p 
+            variants={itemVariants}
+            className="text-base md:text-lg text-white/50 mb-6 tracking-wide font-light"
+          >
             Hii I am Chaitanya, I am a
-          </p>
+          </motion.p>
           
           {/* Large role title with cyan accent and typewriter */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-bold mb-10 leading-[1.05] tracking-tight min-h-[1.2em]">
+          <motion.h1 
+            variants={itemVariants}
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-bold mb-10 leading-[1.05] tracking-tight min-h-[1.2em]"
+          >
             <span className="hero-pink-text">
               {displayText}
             </span>
             <span className="text-cyan-400/60 animate-pulse">|</span>
-          </h1>
+          </motion.h1>
           
           {/* CTA Buttons */}
-          <div className={`flex flex-col sm:flex-row items-center justify-center gap-5 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <motion.div 
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row items-center justify-center gap-5"
+          >
             <NoiseBackground
               containerClassName="w-fit p-[5px] rounded-full"
               gradientColors={[
@@ -102,12 +137,14 @@ const Hero = () => {
                 GitHub
               </a>
             </NoiseBackground>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
 };
 
 export default Hero;
+
+
 

@@ -9,12 +9,14 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import AnimatedBackground from './components/AnimatedBackground';
 import ScrollParticles from './components/ScrollParticles';
+import ScrollProgress from './components/ScrollProgress';
 import { BackgroundBeams } from './components/ui/background-beams';
 import './App.css';
 
 function App() {
   return (
     <div className="min-h-screen bg-black relative overflow-x-hidden">
+      <ScrollProgress />
       <AnimatedBackground />
       <ScrollParticles />
       <BackgroundBeams className="fixed inset-0 z-0 pointer-events-none" />
@@ -34,3 +36,4 @@ function App() {
 }
 
 export default App;
+

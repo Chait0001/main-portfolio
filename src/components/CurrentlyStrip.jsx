@@ -1,4 +1,6 @@
+'use client'
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const items = [
   { emoji: '📍', text: 'based in India' },
@@ -10,15 +12,10 @@ const items = [
 
 const CurrentlyStrip = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsVisible(false);
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % items.length);
-        setIsVisible(true);
-      }, 400);
+      setCurrentIndex((prev) => (prev + 1) % items.length);
     }, 3500);
 
     return () => clearInterval(interval);
@@ -28,19 +25,25 @@ const CurrentlyStrip = () => {
 
   return (
     <div className="py-6 px-4 border-y border-white/[0.06]">
-      <div className="max-w-7xl mx-auto flex items-center justify-center md:justify-start">
-        <div
-          className={`flex items-center gap-2 text-xs tracking-wider transition-all duration-400 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
-          }`}
-        >
-          <span className="text-sm">{item.emoji}</span>
-          <span className="text-white/20 font-mono uppercase">currently:</span>
-          <span className="text-white/35 font-light">{item.text}</span>
-        </div>
+      <div className="max-w-7xl mx-auto flex items-center justify-center md:justify-start overflow-hidden h-5">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.4 }}
+            className="flex items-center gap-2 text-xs tracking-wider"
+          >
+            <span className="text-sm">{item.emoji}</span>
+            <span className="text-white/20 font-mono uppercase">currently:</span>
+            <span className="text-white/35 font-light">{item.text}</span>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
 };
 
 export default CurrentlyStrip;
+

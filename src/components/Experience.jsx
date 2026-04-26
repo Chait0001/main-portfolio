@@ -1,8 +1,7 @@
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
+'use client'
+import { motion } from 'framer-motion';
 
 const Experience = () => {
-  const [ref, isVisible] = useScrollAnimation({ threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
-
   const achievements = [
     {
       icon: '💻',
@@ -27,26 +26,50 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="section-padding" ref={ref}>
+    <section id="experience" className="section-padding py-24">
       <div className="max-w-7xl mx-auto">
-        <h2 className={`text-3xl md:text-5xl font-bold mb-4 transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
-          experience<span className="text-white/20">.</span>
-        </h2>
-        <p className={`text-white/30 text-sm mb-12 font-light transition-all duration-1000 delay-100 ${
-          isVisible ? 'opacity-100' : 'opacity-0'
-        }`}>
-          things i'm actually decent at
-        </p>
+        <div className="mb-12">
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl md:text-5xl font-bold text-white"
+          >
+            experience<span className="text-cyan-400">.</span>
+          </motion.h2>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="h-0.5 bg-cyan-400 origin-left mt-2 w-16"
+          />
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="text-white/30 text-sm mt-6 font-light"
+          >
+            things i'm actually decent at
+          </motion.p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {achievements.map((achievement, index) => (
-            <div
+            <motion.div
               key={achievement.title}
-              className={`bg-white/[0.03] rounded-none p-7 border border-white/[0.06] hover:border-white/[0.12] transition-all duration-500 hover:-translate-y-0.5 group ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-              style={{ transitionDelay: `${index * 0.12}s` }}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+              whileHover={{ 
+                scale: 1.02, 
+                backgroundColor: "rgba(255, 255, 255, 0.05)",
+                transition: { duration: 0.2 } 
+              }}
+              className="bg-white/[0.03] rounded-none p-7 border border-white/[0.06] hover:border-white/[0.12] transition-colors duration-300 group"
             >
               <div className="flex items-start gap-4">
                 <div className="text-2xl mt-0.5 group-hover:opacity-80 transition-opacity duration-300">
@@ -59,7 +82,7 @@ const Experience = () => {
                   <p className="text-white/35 text-sm leading-relaxed font-light">{achievement.description}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -68,3 +91,6 @@ const Experience = () => {
 };
 
 export default Experience;
+
+
+

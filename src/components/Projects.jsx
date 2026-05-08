@@ -26,7 +26,7 @@ const Projects = () => {
       description: "My go-to project for trying out new React patterns. Full CRUD, auth baked in, and an API that I'm actually proud of. Yes, another todo app — but this one's got auth.",
       techStack: ['React', 'Node.js', 'Express.js', 'MongoDB', 'REST API'],
       githubLink: 'https://github.com/Chait0001/Task-Management.git',
-      demoLink: null,
+      demoLink: 'https://task-management-five-weld.vercel.app',
     },
     {
       title: 'DOIFY',

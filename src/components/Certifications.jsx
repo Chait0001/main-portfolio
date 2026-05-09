@@ -20,7 +20,7 @@ const Certifications = () => {
       association: "Newton School of Technology",
       date: "2025",
       icon: "🎨",
-      link: "#"
+      link: "/images/visual-vortex-cert.png"
     }
   ];
 

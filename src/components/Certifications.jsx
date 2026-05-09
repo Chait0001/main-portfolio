@@ -11,7 +11,7 @@ const Certifications = () => {
       date: "January–February 2026",
       id: "EDU-ADR-AIMLDS31-0101260056",
       icon: "🤖",
-      link: "#"
+      link: "/images/aiml-data-science-cert.png"
     },
     {
       title: "Visual Vortex 2.0",

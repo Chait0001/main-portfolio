@@ -13,6 +13,14 @@ const Projects = () => {
       demoLink: 'https://health-sync-final-syvo.vercel.app',
     },
     {
+      title: 'Crack IT!',
+      label: '📝 ai resume builder',
+      description: "An AI-powered resume builder designed to land interviews. Features auto-generated bullet points, real-time ATS scoring, custom templates, and one-click PDF/DOCX exports.",
+      techStack: ['React', 'Node.js', 'Tailwind CSS', 'MongoDB', 'Express', 'Groq API'],
+      githubLink: 'https://github.com/Chait0001/Crack-IT.git',
+      demoLink: 'https://crack-it-pi.vercel.app/',
+    },
+    {
       title: 'Zentron',
       label: '🤖 ai chatbot',
       description: "A full-stack AI chatbot application featuring live conversational capabilities. Integrated with Groq API for fast responses, supported by a robust MERN backend.",
